@@ -41,12 +41,12 @@ h1 {
 
 .carousel img {
     width: 100%;
-    display: none;
+    display: block;
     border-radius: 15px;
 }
 
-.carousel img.active {
-    display: block;
+.carousel img:not(.active) {
+    display: none;
 }
 
 button {
