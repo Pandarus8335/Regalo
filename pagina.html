@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz cumpleaños</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #072896, #120b30);
+    text-align: center;
+    color: white;
+}
+
+.container {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 1.8em;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+/* 🎠 CARRUSEL */
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.carousel img {
+    width: 100%;
+    display: none;
+    border-radius: 15px;
+}
+
+.carousel img.active {
+    display: block;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #ff5e78;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>
+        Tenía planeado esto desde antes, pero por las circunstancias no se pudo...  
+        aun así quería que lo tuvieras ❤️
+    </h1>
+
+    <div class="card">
+        <h2>Nosotros 📸</h2>
+
+<div class="carousel">
+    <img src="f1.jpg" class="active">
+    <img src="f2.jpg">
+    <img src="f3.jpg">
+    <img src="f4.jpg">
+    <img src="f5.jpg">
+</div>
+
+        <button onclick="prev()">⬅</button>
+        <button onclick="next()">➡</button>
+    </div>
+
+    <div class="card">
+        <h2>Para ti 💌</h2>
+        <p>
+            Desde que llegaste a mi vida todo es mejor.  
+            Gracias por cada momento, cada risa y cada abrazo.  
+            Eres alguien muy especial para mí ❤️
+        </p>
+
+        <button onclick="alert('Te amo muchísimo,Espero seas feliz y tengas todo lo que desees ❤️')">
+            Presiona aquí
+        </button>
+    </div>
+</div>
+
+<script>
+let index = 0;
+const images = document.querySelectorAll(".carousel img");
+
+function showImage(i) {
+    images.forEach(img => img.classList.remove("active"));
+    images[i].classList.add("active");
+}
+
+function next() {
+    index = (index + 1) % images.length;
+    showImage(index);
+}
+
+function prev() {
+    index = (index - 1 + images.length) % images.length;
+    showImage(index);
+}
+</script>
+
+</body>
+</html>
