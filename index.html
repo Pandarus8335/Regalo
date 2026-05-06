@@ -31,7 +31,6 @@ h1 {
     max-width: 400px;
 }
 
-/* 🎠 CARRUSEL */
 .carousel {
     position: relative;
     width: 100%;
@@ -41,12 +40,12 @@ h1 {
 
 .carousel img {
     width: 100%;
-    display: block;
+    display: none;
     border-radius: 15px;
 }
 
-.carousel img:not(.active) {
-    display: none;
+.carousel img.active {
+    display: block;
 }
 
 button {
@@ -69,54 +68,80 @@ button {
         aun así quería que lo tuvieras ❤️
     </h1>
 
+    <!-- PRIMER CARRUSEL -->
     <div class="card">
         <h2>Nosotros 📸</h2>
 
-<div class="carousel">
-    <img src="f1.jpeg" class="active">
-    <img src="f2.jpeg">
-    <img src="f3.jpeg">
-    <img src="f4.jpeg">
-    <img src="f5.jpeg">
-</div>
+        <div class="carousel" id="c1">
+            <img src="f1.jpeg" class="active">
+            <img src="f2.jpeg">
+            <img src="f3.jpeg">
+            <img src="f4.jpeg">
+            <img src="f5.jpeg">
+        </div>
 
-        <button onclick="prev()">⬅</button>
-        <button onclick="next()">➡</button>
+        <button onclick="prev('c1')">⬅</button>
+        <button onclick="next('c1')">➡</button>
     </div>
 
+    <!-- SEGUNDO CARRUSEL (CARTAS) -->
     <div class="card">
-        <h2>Para ti 💌</h2>
+        <h2>Algo que ya no te pude dar 💔</h2>
+
         <p>
-            Desde que llegaste a mi vida todo es mejor.  
-            Gracias por cada momento, cada risa y cada abrazo.  
-            Eres alguien muy especial para mí ❤️
+            Estas son cartas que escribí para ti…  
+            cosas que quería decirte, pero ya no tuve la oportunidad.  
+            Aun así, fueron reales.
         </p>
 
-        <button onclick="alert('Te amo muchísimo,Espero seas feliz y tengas todo lo que desees ❤️')">
-            Presiona aquí
-        </button>
+        <div class="carousel" id="c2">
+            <img src="f6.jpeg" class="active">
+            <img src="f7.jpeg">
+            <img src="f8.jpeg">
+            <img src="f9.jpeg">
+            <img src="f10.jpeg">
+            <img src="f11.jpeg">
+            <img src="f12.jpeg">
+            <img src="f13.jpeg">
+            <img src="f14.jpeg">
+            <img src="f15.jpeg">
+        </div>
+
+        <button onclick="prev('c2')">⬅</button>
+        <button onclick="next('c2')">➡</button>
     </div>
+
 </div>
 
 <script>
+const carousels = {};
+
+function initCarousel(id) {
+    const images = document.querySelectorAll(`#${id} img`);
+    carousels[id] = { index: 0, images: images };
+}
+
+function showImage(id, i) {
+    const c = carousels[id];
+    c.images.forEach(img => img.classList.remove("active"));
+    c.images[i].classList.add("active");
+}
+
+function next(id) {
+    const c = carousels[id];
+    c.index = (c.index + 1) % c.images.length;
+    showImage(id, c.index);
+}
+
+function prev(id) {
+    const c = carousels[id];
+    c.index = (c.index - 1 + c.images.length) % c.images.length;
+    showImage(id, c.index);
+}
+
 window.onload = function() {
-    let index = 0;
-    const images = document.querySelectorAll(".carousel img");
-
-    function showImage(i) {
-        images.forEach(img => img.classList.remove("active"));
-        images[i].classList.add("active");
-    }
-
-    window.next = function() {
-        index = (index + 1) % images.length;
-        showImage(index);
-    }
-
-    window.prev = function() {
-        index = (index - 1 + images.length) % images.length;
-        showImage(index);
-    };
+    initCarousel("c1");
+    initCarousel("c2");
 };
 </script>
 
